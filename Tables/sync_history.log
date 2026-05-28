@@ -1,0 +1,433 @@
+2026-05-06 12:49:12,952 - INFO - --- STARTING AZURE SYNC FOR BUSINESS DATE: 20260505 ---
+2026-05-06 12:49:14,049 - INFO - [Arlington] Fetching from Toast API...
+2026-05-06 12:49:14,050 - INFO - Requesting fresh Toast credentials...
+2026-05-06 12:52:18,429 - INFO - --- STARTING AZURE SYNC FOR BUSINESS DATE: 20260505 ---
+2026-05-27 15:06:48,860 - INFO - ============================================================
+2026-05-27 15:06:48,860 - INFO - TOAST CONFIG SYNC — 2026-05-27 15:06:48
+2026-05-27 15:06:48,861 - INFO - ============================================================
+2026-05-27 15:06:50,016 - INFO - [revenue_centers] Fetching from Toast API...
+2026-05-27 15:06:50,017 - INFO - Requesting fresh Toast credentials...
+2026-05-27 15:06:55,288 - INFO - [revenue_centers] 7 records upserted.
+2026-05-27 15:06:55,288 - INFO - [dining_options] Fetching from Toast API...
+2026-05-27 15:07:01,188 - INFO - [dining_options] 25 records upserted.
+2026-05-27 15:07:01,189 - INFO - [services] Fetching from Toast API...
+2026-05-27 15:07:08,308 - INFO - [services] 50 records upserted.
+2026-05-27 15:07:08,308 - INFO - [employees] Fetching from Toast API...
+2026-05-27 15:11:30,331 - INFO - [employees] 4864 records upserted.
+2026-05-27 15:11:30,331 - INFO - [sales_categories] Fetching from Toast API...
+2026-05-27 15:11:35,205 - INFO - [sales_categories] 11 records upserted.
+2026-05-27 15:11:35,206 - INFO - [service_areas] Fetching from Toast API...
+2026-05-27 15:11:40,303 - INFO - [service_areas] 14 records upserted.
+2026-05-27 15:11:40,303 - INFO - [tables] Fetching from Toast API...
+2026-05-27 15:12:01,655 - INFO - [tables] 299 records upserted.
+2026-05-27 15:12:01,708 - INFO - CONFIG SYNC COMPLETE
+2026-05-27 15:12:01,708 - INFO -   revenue_centers      7 records
+2026-05-27 15:12:01,708 - INFO -   dining_options       25 records
+2026-05-27 15:12:01,708 - INFO -   services             50 records
+2026-05-27 15:12:01,708 - INFO -   employees            4864 records
+2026-05-27 15:12:01,708 - INFO -   sales_categories     11 records
+2026-05-27 15:12:01,708 - INFO -   service_areas        14 records
+2026-05-27 15:12:01,708 - INFO -   tables               299 records
+2026-05-27 15:25:42,273 - INFO - --- STARTING DAILY SYNC FOR BUSINESS DATE: 20260526 ---
+2026-05-27 15:25:43,366 - INFO - [Arlington] Fetching orders for 20260526...
+2026-05-27 15:25:43,366 - INFO - Requesting fresh Toast credentials...
+2026-05-27 15:27:18,662 - INFO - [Arlington] OK — 140 orders pulled, 140 upserted, 0 unchanged/skipped, 345 items, 147 payments.
+2026-05-27 15:27:18,662 - INFO - [Burke] Fetching orders for 20260526...
+2026-05-27 15:27:48,425 - ERROR - Error during Orders_Clean batch insert: (psycopg2.ProgrammingError) can't adapt type 'dict'
+[SQL: 
+                INSERT INTO order_items (
+                    selection_guid, check_guid, external_id,
+                    item_guid, item_multi_location_id,
+                    item_group_guid, item_group_multi_loc_id,
+                    sales_category_guid, option_group_guid, dining_option_guid,
+                    item_name, selection_type, unit_of_measure, plu, seat_number,
+                    quantity, unit_price, net_price, pre_discount_price,
+                    tax_amount, tax_inclusion,
+                    fulfillment_status, voided, deferred,
+                    created_date, modified_date, void_date,
+                    void_business_date, void_reason
+                ) VALUES (
+                    %(selection_guid)s, %(check_guid)s, %(external_id)s,
+                    %(item_guid)s, %(item_multi_location_id)s,
+                    %(item_group_guid)s, %(item_group_multi_loc_id)s,
+                    %(sales_category_guid)s, %(option_group_guid)s, %(dining_option_guid)s,
+                    %(item_name)s, %(selection_type)s, %(unit_of_measure)s, %(plu)s, %(seat_number)s,
+                    %(quantity)s, %(unit_price)s, %(net_price)s, %(pre_discount_price)s,
+                    %(tax_amount)s, %(tax_inclusion)s,
+                    %(fulfillment_status)s, %(voided)s, %(deferred)s,
+                    %(created_date)s, %(modified_date)s, %(void_date)s,
+                    %(void_business_date)s, %(void_reason)s
+                )
+                ON CONFLICT (selection_guid) DO UPDATE SET
+                    voided              = EXCLUDED.voided,
+                    fulfillment_status  = EXCLUDED.fulfillment_status,
+                    modified_date       = EXCLUDED.modified_date,
+                    item_group_guid     = EXCLUDED.item_group_guid,
+                    item_group_multi_loc_id = EXCLUDED.item_group_multi_loc_id;
+            ]
+[parameters: [{'selection_guid': 'ce02fe3c-aa9f-4406-8160-03b5fe656ed7', 'check_guid': '260d7fbf-43f2-4ff9-8e41-bc8187d7ad53', 'external_id': None, 'item_guid': '25735582-d86e-47eb-9e90-905d5368381f', 'item_multi_location_id': '400000028271145257', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Special', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 30.0, 'unit_price': 3.09, 'net_price': 92.7, 'pre_discount_price': 92.7, 'tax_amount': 9.27, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'SENT', 'voided': True, 'deferred': False, 'created_date': '2026-05-25T14:52:37.280+0000', 'modified_date': '2026-05-26T08:59:37.543+0000', 'void_date': '2026-05-25T21:22:22.094+0000', 'void_business_date': 20260525, 'void_reason': {'guid': '44bcb876-b633-4b1a-a59d-6bb6d2509c5a', 'entityType': 'VoidReason', 'externalId': None}}, {'selection_guid': '9d09af0f-56d7-41cc-9255-23c1dc6021e2', 'check_guid': '98526b74-7c86-4300-a61f-23cec0d141f0', 'external_id': None, 'item_guid': '708cfe6d-0a1b-4314-a38c-12f129f07928', 'item_multi_location_id': '400000028271145285', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Steak', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 2.0, 'unit_price': 7.2, 'net_price': 14.4, 'pre_discount_price': 14.4, 'tax_amount': 1.44, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T16:53:37.147+0000', 'modified_date': '2026-05-26T09:48:21.433+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': '43d70ea1-77c5-429e-9ebc-7617af138963', 'check_guid': '98526b74-7c86-4300-a61f-23cec0d141f0', 'external_id': None, 'item_guid': 'bf546657-d9d3-406b-a99b-2aed097754a0', 'item_multi_location_id': '400000028271145291', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Cowboy', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 2.0, 'unit_price': 7.95, 'net_price': 15.9, 'pre_discount_price': 15.9, 'tax_amount': 1.59, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T16:53:37.148+0000', 'modified_date': '2026-05-26T09:48:21.541+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': '02a6112d-078a-4093-ac9f-61fde8582daf', 'check_guid': '98526b74-7c86-4300-a61f-23cec0d141f0', 'external_id': None, 'item_guid': '459c1959-6c52-49f6-8f8b-dfd6f8589d33', 'item_multi_location_id': '400000028271145276', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Chicken', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 1.0, 'unit_price': 6.19, 'net_price': 6.19, 'pre_discount_price': 6.19, 'tax_amount': 0.62, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T16:53:37.147+0000', 'modified_date': '2026-05-26T09:48:21.426+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': '1bf27ba1-2aa0-4b10-8877-8ac16bc465b0', 'check_guid': '98526b74-7c86-4300-a61f-23cec0d141f0', 'external_id': None, 'item_guid': '3403647d-4e43-4737-b3f8-50d62a328530', 'item_multi_location_id': '400000028271145262', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Bacon', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 1.0, 'unit_price': 4.59, 'net_price': 4.59, 'pre_discount_price': 4.59, 'tax_amount': 0.46, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T16:53:37.146+0000', 'modified_date': '2026-05-26T09:48:21.419+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': 'e95694bb-a191-419e-8f38-6b3550d672d9', 'check_guid': 'd6a35c4a-b9c0-477a-b749-149fbca15a83', 'external_id': None, 'item_guid': '3403647d-4e43-4737-b3f8-50d62a328530', 'item_multi_location_id': '400000028271145262', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Bacon', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 8.0, 'unit_price': 4.59, 'net_price': 36.72, 'pre_discount_price': 36.72, 'tax_amount': 3.67, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T21:27:59.693+0000', 'modified_date': '2026-05-26T09:27:47.251+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': 'a0056926-9bbe-4d90-97af-e939e42df27c', 'check_guid': 'd6a35c4a-b9c0-477a-b749-149fbca15a83', 'external_id': None, 'item_guid': '25735582-d86e-47eb-9e90-905d5368381f', 'item_multi_location_id': '400000028271145257', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Special', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 10.0, 'unit_price': 3.09, 'net_price': 30.9, 'pre_discount_price': 30.9, 'tax_amount': 3.09, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T21:27:59.692+0000', 'modified_date': '2026-05-26T09:19:03.313+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': '222c1b55-ada7-4dfd-afc6-b7cf9f761024', 'check_guid': 'd6a35c4a-b9c0-477a-b749-149fbca15a83', 'external_id': None, 'item_guid': '6011ae9e-c100-4bda-a479-a8b15ebd767c', 'item_multi_location_id': '400000028271145271', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Sausage', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 8.0, 'unit_price': 4.59, 'net_price': 36.72, 'pre_discount_price': 36.72, 'tax_amount': 3.67, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T21:27:59.695+0000', 'modified_date': '2026-05-26T09:19:38.785+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}  ... displaying 10 of 456 total bound parameter sets ...  {'selection_guid': 'd5eaf776-ba5b-4ff0-b266-cabf3bae36aa', 'check_guid': 'cb78ace8-81d4-4d4a-ba24-a9ce0fec2581', 'external_id': None, 'item_guid': 'c46b54f2-4fc5-42b0-9d43-fd5e17fb2d63', 'item_multi_location_id': '400000058383652665', 'item_group_guid': '004b569e-20e3-4a7e-9788-579f7fd82a2e', 'item_group_multi_loc_id': '400000028490791584', 'sales_category_guid': '4023d547-2d2a-4b1e-b9d0-892ebe8dec04', 'option_group_guid': None, 'dining_option_guid': None, 'item_name': 'Gold Peak-Unsweetened', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': 0, 'quantity': 1.0, 'unit_price': 3.75, 'net_price': 3.75, 'pre_discount_price': 3.75, 'tax_amount': 0.37, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'SENT', 'voided': False, 'deferred': False, 'created_date': '2026-05-27T00:33:41.951+0000', 'modified_date': '2026-05-27T00:33:42.418+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': 'c8b5b74f-caa7-4494-9d52-abf1061b410a', 'check_guid': 'cb78ace8-81d4-4d4a-ba24-a9ce0fec2581', 'external_id': None, 'item_guid': '44ab6825-a1e2-4119-a646-e451e8198d25', 'item_multi_location_id': '400000028271147721', 'item_group_guid': '955583b7-6f4a-4210-a82f-ef7c9955e5e9', 'item_group_multi_loc_id': '400000028629930566', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': None, 'item_name': 'Burrito Bowl', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': 0, 'quantity': 1.0, 'unit_price': 12.15, 'net_price': 12.15, 'pre_discount_price': 12.15, 'tax_amount': 1.22, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-27T00:33:41.923+0000', 'modified_date': '2026-05-27T00:37:06.259+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-05-27 15:27:48,455 - ERROR - [Burke] SYNC FAILED: (psycopg2.ProgrammingError) can't adapt type 'dict'
+[SQL: 
+                INSERT INTO order_items (
+                    selection_guid, check_guid, external_id,
+                    item_guid, item_multi_location_id,
+                    item_group_guid, item_group_multi_loc_id,
+                    sales_category_guid, option_group_guid, dining_option_guid,
+                    item_name, selection_type, unit_of_measure, plu, seat_number,
+                    quantity, unit_price, net_price, pre_discount_price,
+                    tax_amount, tax_inclusion,
+                    fulfillment_status, voided, deferred,
+                    created_date, modified_date, void_date,
+                    void_business_date, void_reason
+                ) VALUES (
+                    %(selection_guid)s, %(check_guid)s, %(external_id)s,
+                    %(item_guid)s, %(item_multi_location_id)s,
+                    %(item_group_guid)s, %(item_group_multi_loc_id)s,
+                    %(sales_category_guid)s, %(option_group_guid)s, %(dining_option_guid)s,
+                    %(item_name)s, %(selection_type)s, %(unit_of_measure)s, %(plu)s, %(seat_number)s,
+                    %(quantity)s, %(unit_price)s, %(net_price)s, %(pre_discount_price)s,
+                    %(tax_amount)s, %(tax_inclusion)s,
+                    %(fulfillment_status)s, %(voided)s, %(deferred)s,
+                    %(created_date)s, %(modified_date)s, %(void_date)s,
+                    %(void_business_date)s, %(void_reason)s
+                )
+                ON CONFLICT (selection_guid) DO UPDATE SET
+                    voided              = EXCLUDED.voided,
+                    fulfillment_status  = EXCLUDED.fulfillment_status,
+                    modified_date       = EXCLUDED.modified_date,
+                    item_group_guid     = EXCLUDED.item_group_guid,
+                    item_group_multi_loc_id = EXCLUDED.item_group_multi_loc_id;
+            ]
+[parameters: [{'selection_guid': 'ce02fe3c-aa9f-4406-8160-03b5fe656ed7', 'check_guid': '260d7fbf-43f2-4ff9-8e41-bc8187d7ad53', 'external_id': None, 'item_guid': '25735582-d86e-47eb-9e90-905d5368381f', 'item_multi_location_id': '400000028271145257', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Special', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 30.0, 'unit_price': 3.09, 'net_price': 92.7, 'pre_discount_price': 92.7, 'tax_amount': 9.27, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'SENT', 'voided': True, 'deferred': False, 'created_date': '2026-05-25T14:52:37.280+0000', 'modified_date': '2026-05-26T08:59:37.543+0000', 'void_date': '2026-05-25T21:22:22.094+0000', 'void_business_date': 20260525, 'void_reason': {'guid': '44bcb876-b633-4b1a-a59d-6bb6d2509c5a', 'entityType': 'VoidReason', 'externalId': None}}, {'selection_guid': '9d09af0f-56d7-41cc-9255-23c1dc6021e2', 'check_guid': '98526b74-7c86-4300-a61f-23cec0d141f0', 'external_id': None, 'item_guid': '708cfe6d-0a1b-4314-a38c-12f129f07928', 'item_multi_location_id': '400000028271145285', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Steak', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 2.0, 'unit_price': 7.2, 'net_price': 14.4, 'pre_discount_price': 14.4, 'tax_amount': 1.44, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T16:53:37.147+0000', 'modified_date': '2026-05-26T09:48:21.433+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': '43d70ea1-77c5-429e-9ebc-7617af138963', 'check_guid': '98526b74-7c86-4300-a61f-23cec0d141f0', 'external_id': None, 'item_guid': 'bf546657-d9d3-406b-a99b-2aed097754a0', 'item_multi_location_id': '400000028271145291', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Cowboy', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 2.0, 'unit_price': 7.95, 'net_price': 15.9, 'pre_discount_price': 15.9, 'tax_amount': 1.59, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T16:53:37.148+0000', 'modified_date': '2026-05-26T09:48:21.541+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': '02a6112d-078a-4093-ac9f-61fde8582daf', 'check_guid': '98526b74-7c86-4300-a61f-23cec0d141f0', 'external_id': None, 'item_guid': '459c1959-6c52-49f6-8f8b-dfd6f8589d33', 'item_multi_location_id': '400000028271145276', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Chicken', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 1.0, 'unit_price': 6.19, 'net_price': 6.19, 'pre_discount_price': 6.19, 'tax_amount': 0.62, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T16:53:37.147+0000', 'modified_date': '2026-05-26T09:48:21.426+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': '1bf27ba1-2aa0-4b10-8877-8ac16bc465b0', 'check_guid': '98526b74-7c86-4300-a61f-23cec0d141f0', 'external_id': None, 'item_guid': '3403647d-4e43-4737-b3f8-50d62a328530', 'item_multi_location_id': '400000028271145262', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Bacon', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 1.0, 'unit_price': 4.59, 'net_price': 4.59, 'pre_discount_price': 4.59, 'tax_amount': 0.46, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T16:53:37.146+0000', 'modified_date': '2026-05-26T09:48:21.419+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': 'e95694bb-a191-419e-8f38-6b3550d672d9', 'check_guid': 'd6a35c4a-b9c0-477a-b749-149fbca15a83', 'external_id': None, 'item_guid': '3403647d-4e43-4737-b3f8-50d62a328530', 'item_multi_location_id': '400000028271145262', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Bacon', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 8.0, 'unit_price': 4.59, 'net_price': 36.72, 'pre_discount_price': 36.72, 'tax_amount': 3.67, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T21:27:59.693+0000', 'modified_date': '2026-05-26T09:27:47.251+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': 'a0056926-9bbe-4d90-97af-e939e42df27c', 'check_guid': 'd6a35c4a-b9c0-477a-b749-149fbca15a83', 'external_id': None, 'item_guid': '25735582-d86e-47eb-9e90-905d5368381f', 'item_multi_location_id': '400000028271145257', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Special', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 10.0, 'unit_price': 3.09, 'net_price': 30.9, 'pre_discount_price': 30.9, 'tax_amount': 3.09, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T21:27:59.692+0000', 'modified_date': '2026-05-26T09:19:03.313+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': '222c1b55-ada7-4dfd-afc6-b7cf9f761024', 'check_guid': 'd6a35c4a-b9c0-477a-b749-149fbca15a83', 'external_id': None, 'item_guid': '6011ae9e-c100-4bda-a479-a8b15ebd767c', 'item_multi_location_id': '400000028271145271', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Sausage', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 8.0, 'unit_price': 4.59, 'net_price': 36.72, 'pre_discount_price': 36.72, 'tax_amount': 3.67, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T21:27:59.695+0000', 'modified_date': '2026-05-26T09:19:38.785+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}  ... displaying 10 of 456 total bound parameter sets ...  {'selection_guid': 'd5eaf776-ba5b-4ff0-b266-cabf3bae36aa', 'check_guid': 'cb78ace8-81d4-4d4a-ba24-a9ce0fec2581', 'external_id': None, 'item_guid': 'c46b54f2-4fc5-42b0-9d43-fd5e17fb2d63', 'item_multi_location_id': '400000058383652665', 'item_group_guid': '004b569e-20e3-4a7e-9788-579f7fd82a2e', 'item_group_multi_loc_id': '400000028490791584', 'sales_category_guid': '4023d547-2d2a-4b1e-b9d0-892ebe8dec04', 'option_group_guid': None, 'dining_option_guid': None, 'item_name': 'Gold Peak-Unsweetened', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': 0, 'quantity': 1.0, 'unit_price': 3.75, 'net_price': 3.75, 'pre_discount_price': 3.75, 'tax_amount': 0.37, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'SENT', 'voided': False, 'deferred': False, 'created_date': '2026-05-27T00:33:41.951+0000', 'modified_date': '2026-05-27T00:33:42.418+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': 'c8b5b74f-caa7-4494-9d52-abf1061b410a', 'check_guid': 'cb78ace8-81d4-4d4a-ba24-a9ce0fec2581', 'external_id': None, 'item_guid': '44ab6825-a1e2-4119-a646-e451e8198d25', 'item_multi_location_id': '400000028271147721', 'item_group_guid': '955583b7-6f4a-4210-a82f-ef7c9955e5e9', 'item_group_multi_loc_id': '400000028629930566', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': None, 'item_name': 'Burrito Bowl', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': 0, 'quantity': 1.0, 'unit_price': 12.15, 'net_price': 12.15, 'pre_discount_price': 12.15, 'tax_amount': 1.22, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-27T00:33:41.923+0000', 'modified_date': '2026-05-27T00:37:06.259+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+Traceback (most recent call last):
+  File "C:\Users\Control Analyst\PycharmProjects\Base_Toast_ETL_Pipeline\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1938, in _exec_single_context
+    self.dialect.do_executemany(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor,
+        ^^^^^^^
+    ...<2 lines>...
+        context,
+        ^^^^^^^^
+    )
+    ^
+  File "C:\Users\Control Analyst\PycharmProjects\Base_Toast_ETL_Pipeline\.venv\Lib\site-packages\sqlalchemy\dialects\postgresql\psycopg2.py", line 801, in do_executemany
+    cursor.executemany(statement, parameters)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.ProgrammingError: can't adapt type 'dict'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Control Analyst\PycharmProjects\Base_Toast_ETL_Pipeline\Tables\Orders_Pull_Update.py", line 87, in run_order_update
+    change_log = upsert_orders(conn, orders_data)
+  File "C:\Users\Control Analyst\PycharmProjects\Base_Toast_ETL_Pipeline\Tables\Orders_Clean.py", line 521, in upsert_orders
+    conn.execute(text("""
+    ~~~~~~~~~~~~^^^^^^^^^
+        INSERT INTO order_items (
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<27 lines>...
+            item_group_multi_loc_id = EXCLUDED.item_group_multi_loc_id;
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    """), tier3_items)
+    ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Control Analyst\PycharmProjects\Base_Toast_ETL_Pipeline\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1421, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\Control Analyst\PycharmProjects\Base_Toast_ETL_Pipeline\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Control Analyst\PycharmProjects\Base_Toast_ETL_Pipeline\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\Control Analyst\PycharmProjects\Base_Toast_ETL_Pipeline\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Control Analyst\PycharmProjects\Base_Toast_ETL_Pipeline\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Control Analyst\PycharmProjects\Base_Toast_ETL_Pipeline\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2365, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Control Analyst\PycharmProjects\Base_Toast_ETL_Pipeline\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1938, in _exec_single_context
+    self.dialect.do_executemany(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor,
+        ^^^^^^^
+    ...<2 lines>...
+        context,
+        ^^^^^^^^
+    )
+    ^
+  File "C:\Users\Control Analyst\PycharmProjects\Base_Toast_ETL_Pipeline\.venv\Lib\site-packages\sqlalchemy\dialects\postgresql\psycopg2.py", line 801, in do_executemany
+    cursor.executemany(statement, parameters)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.ProgrammingError: (psycopg2.ProgrammingError) can't adapt type 'dict'
+[SQL: 
+                INSERT INTO order_items (
+                    selection_guid, check_guid, external_id,
+                    item_guid, item_multi_location_id,
+                    item_group_guid, item_group_multi_loc_id,
+                    sales_category_guid, option_group_guid, dining_option_guid,
+                    item_name, selection_type, unit_of_measure, plu, seat_number,
+                    quantity, unit_price, net_price, pre_discount_price,
+                    tax_amount, tax_inclusion,
+                    fulfillment_status, voided, deferred,
+                    created_date, modified_date, void_date,
+                    void_business_date, void_reason
+                ) VALUES (
+                    %(selection_guid)s, %(check_guid)s, %(external_id)s,
+                    %(item_guid)s, %(item_multi_location_id)s,
+                    %(item_group_guid)s, %(item_group_multi_loc_id)s,
+                    %(sales_category_guid)s, %(option_group_guid)s, %(dining_option_guid)s,
+                    %(item_name)s, %(selection_type)s, %(unit_of_measure)s, %(plu)s, %(seat_number)s,
+                    %(quantity)s, %(unit_price)s, %(net_price)s, %(pre_discount_price)s,
+                    %(tax_amount)s, %(tax_inclusion)s,
+                    %(fulfillment_status)s, %(voided)s, %(deferred)s,
+                    %(created_date)s, %(modified_date)s, %(void_date)s,
+                    %(void_business_date)s, %(void_reason)s
+                )
+                ON CONFLICT (selection_guid) DO UPDATE SET
+                    voided              = EXCLUDED.voided,
+                    fulfillment_status  = EXCLUDED.fulfillment_status,
+                    modified_date       = EXCLUDED.modified_date,
+                    item_group_guid     = EXCLUDED.item_group_guid,
+                    item_group_multi_loc_id = EXCLUDED.item_group_multi_loc_id;
+            ]
+[parameters: [{'selection_guid': 'ce02fe3c-aa9f-4406-8160-03b5fe656ed7', 'check_guid': '260d7fbf-43f2-4ff9-8e41-bc8187d7ad53', 'external_id': None, 'item_guid': '25735582-d86e-47eb-9e90-905d5368381f', 'item_multi_location_id': '400000028271145257', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Special', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 30.0, 'unit_price': 3.09, 'net_price': 92.7, 'pre_discount_price': 92.7, 'tax_amount': 9.27, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'SENT', 'voided': True, 'deferred': False, 'created_date': '2026-05-25T14:52:37.280+0000', 'modified_date': '2026-05-26T08:59:37.543+0000', 'void_date': '2026-05-25T21:22:22.094+0000', 'void_business_date': 20260525, 'void_reason': {'guid': '44bcb876-b633-4b1a-a59d-6bb6d2509c5a', 'entityType': 'VoidReason', 'externalId': None}}, {'selection_guid': '9d09af0f-56d7-41cc-9255-23c1dc6021e2', 'check_guid': '98526b74-7c86-4300-a61f-23cec0d141f0', 'external_id': None, 'item_guid': '708cfe6d-0a1b-4314-a38c-12f129f07928', 'item_multi_location_id': '400000028271145285', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Steak', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 2.0, 'unit_price': 7.2, 'net_price': 14.4, 'pre_discount_price': 14.4, 'tax_amount': 1.44, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T16:53:37.147+0000', 'modified_date': '2026-05-26T09:48:21.433+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': '43d70ea1-77c5-429e-9ebc-7617af138963', 'check_guid': '98526b74-7c86-4300-a61f-23cec0d141f0', 'external_id': None, 'item_guid': 'bf546657-d9d3-406b-a99b-2aed097754a0', 'item_multi_location_id': '400000028271145291', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Cowboy', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 2.0, 'unit_price': 7.95, 'net_price': 15.9, 'pre_discount_price': 15.9, 'tax_amount': 1.59, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T16:53:37.148+0000', 'modified_date': '2026-05-26T09:48:21.541+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': '02a6112d-078a-4093-ac9f-61fde8582daf', 'check_guid': '98526b74-7c86-4300-a61f-23cec0d141f0', 'external_id': None, 'item_guid': '459c1959-6c52-49f6-8f8b-dfd6f8589d33', 'item_multi_location_id': '400000028271145276', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Chicken', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 1.0, 'unit_price': 6.19, 'net_price': 6.19, 'pre_discount_price': 6.19, 'tax_amount': 0.62, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T16:53:37.147+0000', 'modified_date': '2026-05-26T09:48:21.426+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': '1bf27ba1-2aa0-4b10-8877-8ac16bc465b0', 'check_guid': '98526b74-7c86-4300-a61f-23cec0d141f0', 'external_id': None, 'item_guid': '3403647d-4e43-4737-b3f8-50d62a328530', 'item_multi_location_id': '400000028271145262', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Bacon', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 1.0, 'unit_price': 4.59, 'net_price': 4.59, 'pre_discount_price': 4.59, 'tax_amount': 0.46, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T16:53:37.146+0000', 'modified_date': '2026-05-26T09:48:21.419+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': 'e95694bb-a191-419e-8f38-6b3550d672d9', 'check_guid': 'd6a35c4a-b9c0-477a-b749-149fbca15a83', 'external_id': None, 'item_guid': '3403647d-4e43-4737-b3f8-50d62a328530', 'item_multi_location_id': '400000028271145262', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Bacon', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 8.0, 'unit_price': 4.59, 'net_price': 36.72, 'pre_discount_price': 36.72, 'tax_amount': 3.67, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T21:27:59.693+0000', 'modified_date': '2026-05-26T09:27:47.251+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': 'a0056926-9bbe-4d90-97af-e939e42df27c', 'check_guid': 'd6a35c4a-b9c0-477a-b749-149fbca15a83', 'external_id': None, 'item_guid': '25735582-d86e-47eb-9e90-905d5368381f', 'item_multi_location_id': '400000028271145257', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Special', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 10.0, 'unit_price': 3.09, 'net_price': 30.9, 'pre_discount_price': 30.9, 'tax_amount': 3.09, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T21:27:59.692+0000', 'modified_date': '2026-05-26T09:19:03.313+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': '222c1b55-ada7-4dfd-afc6-b7cf9f761024', 'check_guid': 'd6a35c4a-b9c0-477a-b749-149fbca15a83', 'external_id': None, 'item_guid': '6011ae9e-c100-4bda-a479-a8b15ebd767c', 'item_multi_location_id': '400000028271145271', 'item_group_guid': '24744194-9c64-4f1a-8b29-6b045a818912', 'item_group_multi_loc_id': '400000028271144108', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': '383d7b8f-2ab1-4d72-962e-16d12125d815', 'item_name': 'BB Sausage', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': -1, 'quantity': 8.0, 'unit_price': 4.59, 'net_price': 36.72, 'pre_discount_price': 36.72, 'tax_amount': 3.67, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-25T21:27:59.695+0000', 'modified_date': '2026-05-26T09:19:38.785+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}  ... displaying 10 of 456 total bound parameter sets ...  {'selection_guid': 'd5eaf776-ba5b-4ff0-b266-cabf3bae36aa', 'check_guid': 'cb78ace8-81d4-4d4a-ba24-a9ce0fec2581', 'external_id': None, 'item_guid': 'c46b54f2-4fc5-42b0-9d43-fd5e17fb2d63', 'item_multi_location_id': '400000058383652665', 'item_group_guid': '004b569e-20e3-4a7e-9788-579f7fd82a2e', 'item_group_multi_loc_id': '400000028490791584', 'sales_category_guid': '4023d547-2d2a-4b1e-b9d0-892ebe8dec04', 'option_group_guid': None, 'dining_option_guid': None, 'item_name': 'Gold Peak-Unsweetened', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': 0, 'quantity': 1.0, 'unit_price': 3.75, 'net_price': 3.75, 'pre_discount_price': 3.75, 'tax_amount': 0.37, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'SENT', 'voided': False, 'deferred': False, 'created_date': '2026-05-27T00:33:41.951+0000', 'modified_date': '2026-05-27T00:33:42.418+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}, {'selection_guid': 'c8b5b74f-caa7-4494-9d52-abf1061b410a', 'check_guid': 'cb78ace8-81d4-4d4a-ba24-a9ce0fec2581', 'external_id': None, 'item_guid': '44ab6825-a1e2-4119-a646-e451e8198d25', 'item_multi_location_id': '400000028271147721', 'item_group_guid': '955583b7-6f4a-4210-a82f-ef7c9955e5e9', 'item_group_multi_loc_id': '400000028629930566', 'sales_category_guid': '60e65176-a1d0-4a33-b3dc-98ffa63e982b', 'option_group_guid': None, 'dining_option_guid': None, 'item_name': 'Burrito Bowl', 'selection_type': 'NONE', 'unit_of_measure': 'NONE', 'plu': '', 'seat_number': 0, 'quantity': 1.0, 'unit_price': 12.15, 'net_price': 12.15, 'pre_discount_price': 12.15, 'tax_amount': 1.22, 'tax_inclusion': 'NOT_INCLUDED', 'fulfillment_status': 'READY', 'voided': False, 'deferred': False, 'created_date': '2026-05-27T00:33:41.923+0000', 'modified_date': '2026-05-27T00:37:06.259+0000', 'void_date': None, 'void_business_date': None, 'void_reason': None}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-05-27 15:27:48,500 - INFO - [Herndon] Fetching orders for 20260526...
+2026-05-28 07:46:56,420 - INFO - --- STARTING DAILY SYNC FOR BUSINESS DATE: 20260527 ---
+2026-05-28 07:46:57,554 - INFO - [Arlington] Fetching orders for 20260527...
+2026-05-28 07:46:57,555 - INFO - Requesting fresh Toast credentials...
+2026-05-28 07:48:50,737 - INFO - [Arlington] OK — 180 orders pulled, 180 upserted, 0 unchanged/skipped, 412 items, 183 payments.
+2026-05-28 07:48:50,737 - INFO - [Burke] Fetching orders for 20260527...
+2026-05-28 07:51:05,524 - INFO - [Burke] OK — 178 orders pulled, 178 upserted, 0 unchanged/skipped, 518 items, 184 payments.
+2026-05-28 07:51:05,524 - INFO - [Herndon] Fetching orders for 20260527...
+2026-05-28 07:53:45,424 - INFO - [Herndon] OK — 236 orders pulled, 236 upserted, 0 unchanged/skipped, 602 items, 245 payments.
+2026-05-28 07:53:45,424 - INFO - [Leesburg] Fetching orders for 20260527...
+2026-05-28 07:56:22,651 - INFO - [Leesburg] OK — 211 orders pulled, 211 upserted, 0 unchanged/skipped, 598 items, 216 payments.
+2026-05-28 07:56:22,651 - INFO - [Vienna] Fetching orders for 20260527...
+2026-05-28 07:58:28,770 - INFO - [Vienna] OK — 175 orders pulled, 175 upserted, 0 unchanged/skipped, 506 items, 179 payments.
+2026-05-28 07:58:28,771 - INFO - [Ashburn] Fetching orders for 20260527...
+2026-05-28 08:00:48,280 - INFO - [Ashburn] OK — 267 orders pulled, 267 upserted, 0 unchanged/skipped, 671 items, 270 payments.
+2026-05-28 08:00:48,280 - INFO - [Chantilly] Fetching orders for 20260527...
+2026-05-28 08:04:42,828 - INFO - [Chantilly] OK — 340 orders pulled, 340 upserted, 0 unchanged/skipped, 946 items, 339 payments.
+2026-05-28 08:04:42,828 - INFO - [Fairfax] Fetching orders for 20260527...
+2026-05-28 08:07:33,695 - INFO - [Fairfax] OK — 251 orders pulled, 251 upserted, 0 unchanged/skipped, 658 items, 249 payments.
+2026-05-28 08:07:33,696 - INFO - [Manassas] Fetching orders for 20260527...
+2026-05-28 08:09:38,793 - INFO - [Manassas] OK — 200 orders pulled, 200 upserted, 0 unchanged/skipped, 485 items, 203 payments.
+2026-05-28 08:09:38,794 - INFO - [Springfield] Fetching orders for 20260527...
+2026-05-28 08:12:36,720 - INFO - [Springfield] OK — 295 orders pulled, 295 upserted, 0 unchanged/skipped, 660 items, 305 payments.
+2026-05-28 08:12:36,771 - INFO - --- DAILY SYNC COMPLETE ---
+2026-05-28 08:12:36,772 - INFO - Locations: 10 ok / 0 failed  |  Orders upserted: 2333  |  Orders skipped (unchanged): 0  |  Items: 6056  |  Payments: 2373
+2026-05-28 08:19:37,060 - INFO - --- STARTING DAILY SYNC FOR BUSINESS DATE: 20260529 ---
+2026-05-28 08:19:38,214 - INFO - [Arlington] Fetching orders for 20260529...
+2026-05-28 08:19:38,214 - INFO - Requesting fresh Toast credentials...
+2026-05-28 08:19:42,806 - INFO - [Arlington] OK — 2 orders pulled, 2 upserted, 0 unchanged/skipped, 20 items, 1 payments.
+2026-05-28 08:19:42,806 - INFO - [Burke] Fetching orders for 20260529...
+2026-05-28 08:19:43,237 - INFO - [Burke] No orders found for 20260529.
+2026-05-28 08:19:43,237 - INFO - [Herndon] Fetching orders for 20260529...
+2026-05-28 08:19:45,640 - INFO - [Herndon] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 11 items, 1 payments.
+2026-05-28 08:19:45,640 - INFO - [Leesburg] Fetching orders for 20260529...
+2026-05-28 08:19:46,939 - INFO - [Leesburg] OK — 2 orders pulled, 2 upserted, 0 unchanged/skipped, 3 items, 2 payments.
+2026-05-28 08:19:46,940 - INFO - [Vienna] Fetching orders for 20260529...
+2026-05-28 08:19:49,070 - INFO - [Vienna] OK — 2 orders pulled, 2 upserted, 0 unchanged/skipped, 9 items, 2 payments.
+2026-05-28 08:19:49,070 - INFO - [Ashburn] Fetching orders for 20260529...
+2026-05-28 08:19:52,882 - INFO - [Ashburn] OK — 4 orders pulled, 4 upserted, 0 unchanged/skipped, 25 items, 4 payments.
+2026-05-28 08:19:52,882 - INFO - [Chantilly] Fetching orders for 20260529...
+2026-05-28 08:20:01,632 - INFO - [Chantilly] OK — 3 orders pulled, 3 upserted, 0 unchanged/skipped, 41 items, 4 payments.
+2026-05-28 08:20:01,632 - INFO - [Fairfax] Fetching orders for 20260529...
+2026-05-28 08:20:03,691 - INFO - [Fairfax] OK — 2 orders pulled, 2 upserted, 0 unchanged/skipped, 7 items, 2 payments.
+2026-05-28 08:20:03,691 - INFO - [Manassas] Fetching orders for 20260529...
+2026-05-28 08:20:04,130 - INFO - [Manassas] No orders found for 20260529.
+2026-05-28 08:20:04,130 - INFO - [Springfield] Fetching orders for 20260529...
+2026-05-28 08:20:07,341 - INFO - [Springfield] OK — 2 orders pulled, 2 upserted, 0 unchanged/skipped, 15 items, 1 payments.
+2026-05-28 08:20:07,392 - INFO - --- DAILY SYNC COMPLETE ---
+2026-05-28 08:20:07,392 - INFO - Locations: 8 ok / 0 failed  |  Orders upserted: 18  |  Orders skipped (unchanged): 0  |  Items: 131  |  Payments: 17
+2026-05-28 08:20:26,434 - INFO - --- STARTING DAILY SYNC FOR BUSINESS DATE: 20260530 ---
+2026-05-28 08:20:27,538 - INFO - [Arlington] Fetching orders for 20260530...
+2026-05-28 08:20:27,538 - INFO - Requesting fresh Toast credentials...
+2026-05-28 08:20:31,030 - INFO - [Arlington] OK — 2 orders pulled, 2 upserted, 0 unchanged/skipped, 11 items, 3 payments.
+2026-05-28 08:20:31,030 - INFO - [Burke] Fetching orders for 20260530...
+2026-05-28 08:20:35,065 - INFO - [Burke] OK — 4 orders pulled, 4 upserted, 0 unchanged/skipped, 15 items, 4 payments.
+2026-05-28 08:20:35,065 - INFO - [Herndon] Fetching orders for 20260530...
+2026-05-28 08:20:36,256 - INFO - [Herndon] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 2 items, 1 payments.
+2026-05-28 08:20:36,256 - INFO - [Leesburg] Fetching orders for 20260530...
+2026-05-28 08:20:39,038 - INFO - [Leesburg] OK — 2 orders pulled, 2 upserted, 0 unchanged/skipped, 9 items, 2 payments.
+2026-05-28 08:20:39,038 - INFO - [Vienna] Fetching orders for 20260530...
+2026-05-28 08:20:41,642 - INFO - [Vienna] OK — 2 orders pulled, 2 upserted, 0 unchanged/skipped, 8 items, 2 payments.
+2026-05-28 08:20:41,642 - INFO - [Ashburn] Fetching orders for 20260530...
+2026-05-28 08:20:46,486 - INFO - [Ashburn] OK — 2 orders pulled, 2 upserted, 0 unchanged/skipped, 16 items, 3 payments.
+2026-05-28 08:20:46,486 - INFO - [Chantilly] Fetching orders for 20260530...
+2026-05-28 08:20:49,014 - INFO - [Chantilly] OK — 3 orders pulled, 3 upserted, 0 unchanged/skipped, 10 items, 3 payments.
+2026-05-28 08:20:49,014 - INFO - [Fairfax] Fetching orders for 20260530...
+2026-05-28 08:20:50,616 - INFO - [Fairfax] OK — 2 orders pulled, 2 upserted, 0 unchanged/skipped, 4 items, 2 payments.
+2026-05-28 08:20:50,616 - INFO - [Manassas] Fetching orders for 20260530...
+2026-05-28 08:20:54,330 - INFO - [Manassas] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 17 items, 1 payments.
+2026-05-28 08:20:54,330 - INFO - [Springfield] Fetching orders for 20260530...
+2026-05-28 08:20:58,822 - INFO - [Springfield] OK — 3 orders pulled, 3 upserted, 0 unchanged/skipped, 22 items, 5 payments.
+2026-05-28 08:20:58,875 - INFO - --- DAILY SYNC COMPLETE ---
+2026-05-28 08:20:58,875 - INFO - Locations: 10 ok / 0 failed  |  Orders upserted: 22  |  Orders skipped (unchanged): 0  |  Items: 114  |  Payments: 26
+2026-05-28 11:53:59,349 - INFO - --- STARTING DAILY SYNC FOR BUSINESS DATE: 20260531 ---
+2026-05-28 11:54:00,480 - INFO - [Arlington] Fetching orders for 20260531...
+2026-05-28 11:54:00,480 - INFO - Requesting fresh Toast credentials...
+2026-05-28 11:54:02,989 - INFO - [Arlington] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 7 items, 1 payments.
+2026-05-28 11:54:02,989 - INFO - [Burke] Fetching orders for 20260531...
+2026-05-28 11:54:03,432 - INFO - [Burke] No orders found for 20260531.
+2026-05-28 11:54:03,432 - INFO - [Herndon] Fetching orders for 20260531...
+2026-05-28 11:54:05,308 - INFO - [Herndon] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 7 items, 1 payments.
+2026-05-28 11:54:05,309 - INFO - [Leesburg] Fetching orders for 20260531...
+2026-05-28 11:54:12,524 - INFO - [Leesburg] OK — 4 orders pulled, 4 upserted, 0 unchanged/skipped, 34 items, 4 payments.
+2026-05-28 11:54:12,524 - INFO - [Vienna] Fetching orders for 20260531...
+2026-05-28 11:54:15,360 - INFO - [Vienna] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 12 items, 0 payments.
+2026-05-28 11:54:15,360 - INFO - [Ashburn] Fetching orders for 20260531...
+2026-05-28 11:54:15,798 - INFO - [Ashburn] No orders found for 20260531.
+2026-05-28 11:54:15,799 - INFO - [Chantilly] Fetching orders for 20260531...
+2026-05-28 11:54:18,434 - INFO - [Chantilly] OK — 2 orders pulled, 2 upserted, 0 unchanged/skipped, 9 items, 2 payments.
+2026-05-28 11:54:18,434 - INFO - [Fairfax] Fetching orders for 20260531...
+2026-05-28 11:54:19,764 - INFO - [Fairfax] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 3 items, 1 payments.
+2026-05-28 11:54:19,764 - INFO - [Manassas] Fetching orders for 20260531...
+2026-05-28 11:54:22,817 - INFO - [Manassas] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 15 items, 1 payments.
+2026-05-28 11:54:22,818 - INFO - [Springfield] Fetching orders for 20260531...
+2026-05-28 11:54:23,259 - INFO - [Springfield] No orders found for 20260531.
+2026-05-28 11:54:23,311 - INFO - --- DAILY SYNC COMPLETE ---
+2026-05-28 11:54:23,311 - INFO - Locations: 7 ok / 0 failed  |  Orders upserted: 11  |  Orders skipped (unchanged): 0  |  Items: 87  |  Payments: 10
+2026-05-28 11:54:32,805 - INFO - --- STARTING DAILY SYNC FOR BUSINESS DATE: 20260601 ---
+2026-05-28 11:54:33,880 - INFO - [Arlington] Fetching orders for 20260601...
+2026-05-28 11:54:33,881 - INFO - Requesting fresh Toast credentials...
+2026-05-28 11:54:34,720 - INFO - [Arlington] No orders found for 20260601.
+2026-05-28 11:54:34,720 - INFO - [Burke] Fetching orders for 20260601...
+2026-05-28 11:54:35,114 - INFO - [Burke] No orders found for 20260601.
+2026-05-28 11:54:35,114 - INFO - [Herndon] Fetching orders for 20260601...
+2026-05-28 11:54:37,559 - INFO - [Herndon] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 9 items, 1 payments.
+2026-05-28 11:54:37,559 - INFO - [Leesburg] Fetching orders for 20260601...
+2026-05-28 11:54:38,142 - INFO - [Leesburg] No orders found for 20260601.
+2026-05-28 11:54:38,142 - INFO - [Vienna] Fetching orders for 20260601...
+2026-05-28 11:54:40,186 - INFO - [Vienna] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 9 items, 1 payments.
+2026-05-28 11:54:40,187 - INFO - [Ashburn] Fetching orders for 20260601...
+2026-05-28 11:54:40,999 - INFO - [Ashburn] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 1 items, 1 payments.
+2026-05-28 11:54:40,999 - INFO - [Chantilly] Fetching orders for 20260601...
+2026-05-28 11:54:41,949 - INFO - [Chantilly] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 2 items, 1 payments.
+2026-05-28 11:54:41,949 - INFO - [Fairfax] Fetching orders for 20260601...
+2026-05-28 11:54:42,381 - INFO - [Fairfax] No orders found for 20260601.
+2026-05-28 11:54:42,381 - INFO - [Manassas] Fetching orders for 20260601...
+2026-05-28 11:54:42,818 - INFO - [Manassas] No orders found for 20260601.
+2026-05-28 11:54:42,818 - INFO - [Springfield] Fetching orders for 20260601...
+2026-05-28 11:54:47,878 - INFO - [Springfield] OK — 2 orders pulled, 2 upserted, 0 unchanged/skipped, 24 items, 3 payments.
+2026-05-28 11:54:47,933 - INFO - --- DAILY SYNC COMPLETE ---
+2026-05-28 11:54:47,934 - INFO - Locations: 5 ok / 0 failed  |  Orders upserted: 6  |  Orders skipped (unchanged): 0  |  Items: 45  |  Payments: 7
+2026-05-28 11:54:55,419 - INFO - --- STARTING DAILY SYNC FOR BUSINESS DATE: 20260602 ---
+2026-05-28 11:54:56,436 - INFO - [Arlington] Fetching orders for 20260602...
+2026-05-28 11:54:56,436 - INFO - Requesting fresh Toast credentials...
+2026-05-28 11:54:57,338 - INFO - [Arlington] No orders found for 20260602.
+2026-05-28 11:54:57,339 - INFO - [Burke] Fetching orders for 20260602...
+2026-05-28 11:54:57,773 - INFO - [Burke] No orders found for 20260602.
+2026-05-28 11:54:57,773 - INFO - [Herndon] Fetching orders for 20260602...
+2026-05-28 11:54:59,288 - INFO - [Herndon] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 4 items, 1 payments.
+2026-05-28 11:54:59,289 - INFO - [Leesburg] Fetching orders for 20260602...
+2026-05-28 11:54:59,699 - INFO - [Leesburg] No orders found for 20260602.
+2026-05-28 11:54:59,699 - INFO - [Vienna] Fetching orders for 20260602...
+2026-05-28 11:55:04,688 - INFO - [Vienna] OK — 3 orders pulled, 3 upserted, 0 unchanged/skipped, 26 items, 2 payments.
+2026-05-28 11:55:04,688 - INFO - [Ashburn] Fetching orders for 20260602...
+2026-05-28 11:55:05,121 - INFO - [Ashburn] No orders found for 20260602.
+2026-05-28 11:55:05,121 - INFO - [Chantilly] Fetching orders for 20260602...
+2026-05-28 11:55:06,873 - INFO - [Chantilly] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 7 items, 1 payments.
+2026-05-28 11:55:06,873 - INFO - [Fairfax] Fetching orders for 20260602...
+2026-05-28 11:55:07,294 - INFO - [Fairfax] No orders found for 20260602.
+2026-05-28 11:55:07,294 - INFO - [Manassas] Fetching orders for 20260602...
+2026-05-28 11:55:07,719 - INFO - [Manassas] No orders found for 20260602.
+2026-05-28 11:55:07,719 - INFO - [Springfield] Fetching orders for 20260602...
+2026-05-28 11:55:11,140 - INFO - [Springfield] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 7 items, 1 payments.
+2026-05-28 11:55:11,189 - INFO - --- DAILY SYNC COMPLETE ---
+2026-05-28 11:55:11,190 - INFO - Locations: 4 ok / 0 failed  |  Orders upserted: 6  |  Orders skipped (unchanged): 0  |  Items: 44  |  Payments: 5
+2026-05-28 11:55:17,085 - INFO - --- STARTING DAILY SYNC FOR BUSINESS DATE: 20260603 ---
+2026-05-28 11:55:18,173 - INFO - [Arlington] Fetching orders for 20260603...
+2026-05-28 11:55:18,173 - INFO - Requesting fresh Toast credentials...
+2026-05-28 11:55:20,302 - INFO - [Arlington] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 6 items, 1 payments.
+2026-05-28 11:55:20,302 - INFO - [Burke] Fetching orders for 20260603...
+2026-05-28 11:55:20,718 - INFO - [Burke] No orders found for 20260603.
+2026-05-28 11:55:20,718 - INFO - [Herndon] Fetching orders for 20260603...
+2026-05-28 11:55:21,120 - INFO - [Herndon] No orders found for 20260603.
+2026-05-28 11:55:21,120 - INFO - [Leesburg] Fetching orders for 20260603...
+2026-05-28 11:55:21,557 - INFO - [Leesburg] No orders found for 20260603.
+2026-05-28 11:55:21,557 - INFO - [Vienna] Fetching orders for 20260603...
+2026-05-28 11:55:21,995 - INFO - [Vienna] No orders found for 20260603.
+2026-05-28 11:55:21,995 - INFO - [Ashburn] Fetching orders for 20260603...
+2026-05-28 11:55:22,427 - INFO - [Ashburn] No orders found for 20260603.
+2026-05-28 11:55:22,427 - INFO - [Chantilly] Fetching orders for 20260603...
+2026-05-28 11:55:22,841 - INFO - [Chantilly] No orders found for 20260603.
+2026-05-28 11:55:22,841 - INFO - [Fairfax] Fetching orders for 20260603...
+2026-05-28 11:55:26,580 - INFO - [Fairfax] OK — 2 orders pulled, 2 upserted, 0 unchanged/skipped, 18 items, 2 payments.
+2026-05-28 11:55:26,580 - INFO - [Manassas] Fetching orders for 20260603...
+2026-05-28 11:55:35,437 - INFO - [Manassas] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 4 items, 0 payments.
+2026-05-28 11:55:35,437 - INFO - [Springfield] Fetching orders for 20260603...
+2026-05-28 11:55:35,871 - INFO - [Springfield] No orders found for 20260603.
+2026-05-28 11:55:35,927 - INFO - --- DAILY SYNC COMPLETE ---
+2026-05-28 11:55:35,927 - INFO - Locations: 3 ok / 0 failed  |  Orders upserted: 4  |  Orders skipped (unchanged): 0  |  Items: 28  |  Payments: 3
+2026-05-28 11:55:41,206 - INFO - --- STARTING DAILY SYNC FOR BUSINESS DATE: 20260604 ---
+2026-05-28 11:55:42,275 - INFO - [Arlington] Fetching orders for 20260604...
+2026-05-28 11:55:42,275 - INFO - Requesting fresh Toast credentials...
+2026-05-28 11:55:43,120 - INFO - [Arlington] No orders found for 20260604.
+2026-05-28 11:55:43,120 - INFO - [Burke] Fetching orders for 20260604...
+2026-05-28 11:55:44,180 - INFO - [Burke] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 2 items, 1 payments.
+2026-05-28 11:55:44,181 - INFO - [Herndon] Fetching orders for 20260604...
+2026-05-28 11:55:44,610 - INFO - [Herndon] No orders found for 20260604.
+2026-05-28 11:55:44,610 - INFO - [Leesburg] Fetching orders for 20260604...
+2026-05-28 11:55:45,045 - INFO - [Leesburg] No orders found for 20260604.
+2026-05-28 11:55:45,045 - INFO - [Vienna] Fetching orders for 20260604...
+2026-05-28 11:55:47,915 - INFO - [Vienna] OK — 2 orders pulled, 2 upserted, 0 unchanged/skipped, 12 items, 1 payments.
+2026-05-28 11:55:47,915 - INFO - [Ashburn] Fetching orders for 20260604...
+2026-05-28 11:55:48,685 - INFO - [Ashburn] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 1 items, 1 payments.
+2026-05-28 11:55:48,685 - INFO - [Chantilly] Fetching orders for 20260604...
+2026-05-28 11:55:49,099 - INFO - [Chantilly] No orders found for 20260604.
+2026-05-28 11:55:49,099 - INFO - [Fairfax] Fetching orders for 20260604...
+2026-05-28 11:55:49,529 - INFO - [Fairfax] No orders found for 20260604.
+2026-05-28 11:55:49,529 - INFO - [Manassas] Fetching orders for 20260604...
+2026-05-28 11:55:49,980 - INFO - [Manassas] No orders found for 20260604.
+2026-05-28 11:55:49,981 - INFO - [Springfield] Fetching orders for 20260604...
+2026-05-28 11:55:51,467 - INFO - [Springfield] OK — 1 orders pulled, 1 upserted, 0 unchanged/skipped, 5 items, 1 payments.
+2026-05-28 11:55:51,525 - INFO - --- DAILY SYNC COMPLETE ---
+2026-05-28 11:55:51,526 - INFO - Locations: 4 ok / 0 failed  |  Orders upserted: 5  |  Orders skipped (unchanged): 0  |  Items: 20  |  Payments: 4
+2026-05-28 12:07:44,428 - INFO - --- STARTING DAILY SYNC FOR BUSINESS DATE: 20260528 ---
+2026-05-28 12:07:45,603 - INFO - [Arlington] Fetching orders for 20260528...
+2026-05-28 12:07:45,603 - INFO - Requesting fresh Toast credentials...
+2026-05-28 12:08:52,929 - INFO - [Arlington] OK — 105 orders pulled, 105 upserted, 0 unchanged/skipped, 264 items, 98 payments.
+2026-05-28 12:08:52,930 - INFO - [Burke] Fetching orders for 20260528...
+2026-05-28 12:09:45,162 - INFO - [Burke] OK — 85 orders pulled, 85 upserted, 0 unchanged/skipped, 208 items, 83 payments.
+2026-05-28 12:09:45,162 - INFO - [Herndon] Fetching orders for 20260528...
+2026-05-28 12:11:22,229 - INFO - [Herndon] OK — 165 orders pulled, 165 upserted, 0 unchanged/skipped, 375 items, 165 payments.
+2026-05-28 12:11:22,229 - INFO - [Leesburg] Fetching orders for 20260528...
+2026-05-28 12:13:18,862 - INFO - [Leesburg] OK — 178 orders pulled, 178 upserted, 0 unchanged/skipped, 471 items, 175 payments.
+2026-05-28 12:13:18,862 - INFO - [Vienna] Fetching orders for 20260528...
+2026-05-28 12:14:35,163 - INFO - [Vienna] OK — 112 orders pulled, 112 upserted, 0 unchanged/skipped, 302 items, 102 payments.
+2026-05-28 12:14:35,163 - INFO - [Ashburn] Fetching orders for 20260528...
+2026-05-28 12:16:24,137 - INFO - [Ashburn] OK — 220 orders pulled, 220 upserted, 0 unchanged/skipped, 520 items, 217 payments.
+2026-05-28 12:16:24,137 - INFO - [Chantilly] Fetching orders for 20260528...
+2026-05-28 12:19:11,622 - INFO - [Chantilly] OK — 275 orders pulled, 275 upserted, 0 unchanged/skipped, 678 items, 262 payments.
+2026-05-28 12:19:11,623 - INFO - [Fairfax] Fetching orders for 20260528...
+2026-05-28 12:21:04,531 - INFO - [Fairfax] OK — 167 orders pulled, 167 upserted, 0 unchanged/skipped, 464 items, 163 payments.
+2026-05-28 12:21:04,531 - INFO - [Manassas] Fetching orders for 20260528...
+2026-05-28 12:22:21,434 - INFO - [Manassas] OK — 138 orders pulled, 138 upserted, 0 unchanged/skipped, 291 items, 133 payments.
+2026-05-28 12:22:21,434 - INFO - [Springfield] Fetching orders for 20260528...
+2026-05-28 12:24:25,073 - INFO - [Springfield] OK — 218 orders pulled, 218 upserted, 0 unchanged/skipped, 473 items, 208 payments.
+2026-05-28 12:24:25,128 - INFO - --- DAILY SYNC COMPLETE ---
+2026-05-28 12:24:25,128 - INFO - Locations: 10 ok / 0 failed  |  Orders upserted: 1663  |  Orders skipped (unchanged): 0  |  Items: 4046  |  Payments: 1606
